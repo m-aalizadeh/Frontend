@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import GroupIcon from "@mui/icons-material/Group";
 import PlaceIcon from "@mui/icons-material/Place";
 import WebIcon from "@mui/icons-material/Web";
+import Visible from "../common/Visible";
 const Profile = ({
   bio,
   name,
@@ -27,25 +28,31 @@ const Profile = ({
       <Grid>
         <Typography variant="body">{login}</Typography>
       </Grid>
-      <Grid>
-        <Typography variant="body">{bio}</Typography>
-      </Grid>
+      <Visible when={bio}>
+        <Grid>
+          <Typography variant="body">{bio}</Typography>
+        </Grid>
+      </Visible>
       <Stack alignItems="center" direction="row" gap={1}>
         <GroupIcon mt={4} />
         <Typography variant="body">Followers</Typography>:{followers}
         {`  `}-{`  `}
         <Typography variant="body">Following</Typography>:{following}
       </Stack>
-      <Stack alignItems="center" direction="row" gap={1}>
-        <PlaceIcon />
-        <Typography variant="body">{location}</Typography>
-      </Stack>
-      <Stack alignItems="center" direction="row" gap={1}>
-        <WebIcon />
-        <a href={blog} target="_blank" rel="noreferrer">
-          {blog}
-        </a>
-      </Stack>
+      <Visible when={location}>
+        <Stack alignItems="center" direction="row" gap={1}>
+          <PlaceIcon />
+          <Typography variant="body">{location}</Typography>
+        </Stack>
+      </Visible>
+      <Visible when={blog}>
+        <Stack alignItems="center" direction="row" gap={1}>
+          <WebIcon />
+          <a href={blog} target="_blank" rel="noreferrer">
+            {blog}
+          </a>
+        </Stack>
+      </Visible>
     </Grid>
   );
 };
